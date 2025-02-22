@@ -659,7 +659,7 @@ def parse_args():
         # raise NotImplementedError("check save model and load model hook and xformers")
     elif args.base_model_name == "modelscope":
         args.pretrained_teacher_model = (
-            "yuanhao_project/diffusers/text-to-video-ms-1.7b"
+            "ali-vilab/text-to-video-ms-1.7b"
         )
         args.motion_adapter_path = ""
         args.online_pretrained_teacher_model = "ali-vilab/text-to-video-ms-1.7b"

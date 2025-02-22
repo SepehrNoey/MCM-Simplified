@@ -197,15 +197,16 @@ def log_validation(
         generator = torch.Generator(device=accelerator.device).manual_seed(args.seed)
 
     validation_prompts = [
-        "portrait photo of a girl, photograph, highly detailed face, depth of field, moody light, golden hour, style by Dan Winters, Russell James, Steve McCurry, centered, extremely detailed, Nikon D850, award winning photography",
-        "Self-portrait oil painting, a beautiful cyborg with golden hair, 8k",
-        "Astronaut in a jungle, cold color palette, muted colors, detailed, 8k",
-        "A photo of beautiful mountain with realistic sunset and blue lake, highly detailed, masterpiece",
-        "Cute small corgi sitting in a movie theater eating popcorn, unreal engine.",
-        "A Pikachu with an angry expression and red eyes, with lightning around it, hyper realistic style.",
-        "A dog is reading a thick book.",
-        "Three cats having dinner at a table at new years eve, cinematic shot, 8k.",
-        "An astronaut riding a pig, highly realistic dslr photo, cinematic shot.",
+        "Delicious chocolate cake with white cream and strawberry on it, highly detailed, 8k.",
+        "Fried Salmon is getting served on a white dish with rice and steamed vegetables, garnished with fresh herbs and a lemon wedge, beautifully plated, detailed, 8k.",
+        "A woman in the kitchen is mixing cake batter in a large bowl, carefully folding in chocolate chips, while the oven preheats nearby.",
+        "A man is chopping the carrots into small pieces on a wooden cutting board, his knife moving swiftly as he prepares ingredients for a hearty stew.",
+        "A man wearing a white apron is making salad.",
+        "Cutting raw meat into strips, ready to be fried in hot oil in a skillet.",
+        "Grilling chicken breasts on a hot barbecue, the flames flickering underneath, 8k.",
+        "Stirring pasta in boiling water, waiting for it to cook al dente.",
+        "Spreading sauce on pizza dough, preparing it for toppings and baking.",
+        "Rolling sushi with fresh fish, rice, and vegetables in a bamboo mat."
     ]
 
     image_logs = []
@@ -226,15 +227,13 @@ def log_validation(
                 output = spatial_head(output)
 
             output = pipeline.decode_latents(output)
-            video = tensor2vid(output, pipeline.image_processor, output_type="np")
+            video = tensor2vid(output, pipeline.video_processor, output_type="np")
             # video should be a tensor of shape (t, h, w, 3), min 0, max 1
             video = video[0]
 
-        save_dir = os.path.join(args.output_dir, "output", f"{name}-step-{step}")
-        if accelerator.is_main_process:
-            if not os.path.exists(save_dir):
-                os.makedirs(save_dir, exist_ok=True)
-        accelerator.wait_for_everyone()
+        save_dir = os.path.join(args.output_dir, "output", f"{logger_prefix}_{num_inference_steps}_inf-steps_{name}_step-{step}")
+        if not os.path.exists(save_dir):
+            os.makedirs(save_dir, exist_ok=True)
 
         image_logs.append({"validation_prompt": prompt, "video": video})
         save_to_local(save_dir, prompt, video)
@@ -347,7 +346,7 @@ def log_validation(
 
 def main(args):
     # torch.multiprocessing.set_sharing_strategy("file_system")
-    dist_init()
+    # dist_init()
     if args.report_to == "wandb" and args.hub_token is not None:
         raise ValueError(
             "You cannot use both --report_to=wandb and --hub_token due to a security risk of exposing your token."
@@ -371,23 +370,18 @@ def main(args):
     )
 
     total_batch_size = (
-        args.train_batch_size
-        * accelerator.num_processes
-        * args.gradient_accumulation_steps
+        args.train_batch_size * args.gradient_accumulation_steps
     )
 
     # Make one log on every process with the configuration for debugging.
     logger.info("Printing accelerate state", main_process_only=False)
     logger.info(accelerator.state, main_process_only=False)
-    if accelerator.is_local_main_process:
-        transformers.utils.logging.set_verbosity_warning()
-        diffusers.utils.logging.set_verbosity_info()
-    else:
-        transformers.utils.logging.set_verbosity_error()
-        diffusers.utils.logging.set_verbosity_error()
+    transformers.utils.logging.set_verbosity_warning()
+    diffusers.utils.logging.set_verbosity_info()
 
+    # disabled lr scaling currently! (in the running script)
     if args.scale_lr:
-        args.learning_rate = args.learning_rate * total_batch_size / 128
+        args.learning_rate = args.learning_rate * total_batch_size / 128    
         args.disc_learning_rate = (
             args.disc_learning_rate * total_batch_size * args.disc_tsn_num_frames / 128
         )
@@ -405,24 +399,16 @@ def main(args):
         set_seed(args.seed)
 
     # Handle the repository creation
-    if accelerator.is_main_process:
-        if args.output_dir is not None:
-            os.makedirs(args.output_dir, exist_ok=True)
+    if args.output_dir is not None:
+        os.makedirs(args.output_dir, exist_ok=True)
 
-        if args.push_to_hub:
-            repo_id = create_repo(
-                repo_id=args.hub_model_id or Path(args.output_dir).name,
-                exist_ok=True,
-                token=args.hub_token,
-                private=True,
-            ).repo_id
-
-    try:
-        accelerator.wait_for_everyone()
-    except Exception as e:
-        logger.error(f"Failed to wait for everyone: {e}")
-        dist_init_wo_accelerate()
-        accelerator.wait_for_everyone()
+    if args.push_to_hub:
+        repo_id = create_repo(
+            repo_id=args.hub_model_id or Path(args.output_dir).name,
+            exist_ok=True,
+            token=args.hub_token,
+            private=True,
+        ).repo_id
 
     # 1. Create the noise scheduler and the desired noise schedule.
     try:
@@ -756,74 +742,72 @@ def main(args):
         if args.use_lora:
 
             def save_model_hook(models, weights, output_dir):
-                if accelerator.is_main_process:
-                    unet_ = accelerator.unwrap_model(unet)
-                    lora_state_dict = get_peft_model_state_dict(
-                        unet_, adapter_name="default"
-                    )
-                    StableDiffusionPipeline.save_lora_weights(
-                        os.path.join(output_dir, "unet_lora"), lora_state_dict
-                    )
-                    # save weights in peft format to be able to load them back
-                    unet_.save_pretrained(output_dir)
+                unet_ = accelerator.unwrap_model(unet)
+                lora_state_dict = get_peft_model_state_dict(
+                    unet_, adapter_name="default"
+                )
+                StableDiffusionPipeline.save_lora_weights(
+                    os.path.join(output_dir, "unet_lora"), lora_state_dict
+                )
+                # save weights in peft format to be able to load them back
+                unet_.save_pretrained(output_dir)
 
-                    discriminator_ = accelerator.unwrap_model(discriminator)
-                    discriminator_.save_pretrained(
-                        os.path.join(output_dir, "discriminator")
+                discriminator_ = accelerator.unwrap_model(discriminator)
+                discriminator_.save_pretrained(
+                    os.path.join(output_dir, "discriminator")
+                )
+
+                if args.cd_target in ["learn", "hlearn"]:
+                    spatial_head_ = accelerator.unwrap_model(spatial_head)
+                    spatial_head_.save_pretrained(
+                        os.path.join(output_dir, "spatial_head")
+                    )
+                    target_spatial_head_ = accelerator.unwrap_model(
+                        target_spatial_head
+                    )
+                    target_spatial_head_.save_pretrained(
+                        os.path.join(output_dir, "target_spatial_head")
                     )
 
-                    if args.cd_target in ["learn", "hlearn"]:
-                        spatial_head_ = accelerator.unwrap_model(spatial_head)
-                        spatial_head_.save_pretrained(
-                            os.path.join(output_dir, "spatial_head")
-                        )
-                        target_spatial_head_ = accelerator.unwrap_model(
-                            target_spatial_head
-                        )
-                        target_spatial_head_.save_pretrained(
-                            os.path.join(output_dir, "target_spatial_head")
-                        )
-
-                    for _, model in enumerate(models):
-                        # make sure to pop weight so that corresponding model is not saved again
-                        if len(weights) > 0:
-                            weights.pop()
+                for _, model in enumerate(models):
+                    # make sure to pop weight so that corresponding model is not saved again
+                    if len(weights) > 0:
+                        weights.pop()
 
         else:
             # only support finetune motion module for AnimateDiff
             def save_model_hook(models, weights, output_dir):
-                if accelerator.is_main_process:
-                    target_unet_ = accelerator.unwrap_model(target_unet)
-                    target_unet_.save_motion_modules(
-                        os.path.join(output_dir, "target_motion_modules")
+                target_unet_ = accelerator.unwrap_model(target_unet)
+                target_unet_.save_motion_modules(
+                    os.path.join(output_dir, "target_motion_modules")
+                )
+
+                unet_ = accelerator.unwrap_model(unet)
+                unet_.save_motion_modules(
+                    os.path.join(output_dir, "motion_modules")
+                )
+
+                discriminator_ = accelerator.unwrap_model(discriminator)
+                discriminator_.save_pretrained(
+                    os.path.join(output_dir, "discriminator")
+                )
+
+                if args.cd_target in ["learn", "hlearn"]:
+                    spatial_head_ = accelerator.unwrap_model(spatial_head)
+                    spatial_head_.save_pretrained(
+                        os.path.join(output_dir, "spatial_head")
+                    )
+                    target_spatial_head_ = accelerator.unwrap_model(
+                        target_spatial_head
+                    )
+                    target_spatial_head_.save_pretrained(
+                        os.path.join(output_dir, "target_spatial_head")
                     )
 
-                    unet_ = accelerator.unwrap_model(unet)
-                    unet_.save_motion_modules(
-                        os.path.join(output_dir, "motion_modules")
-                    )
-
-                    discriminator_ = accelerator.unwrap_model(discriminator)
-                    discriminator_.save_pretrained(
-                        os.path.join(output_dir, "discriminator")
-                    )
-
-                    if args.cd_target in ["learn", "hlearn"]:
-                        spatial_head_ = accelerator.unwrap_model(spatial_head)
-                        spatial_head_.save_pretrained(
-                            os.path.join(output_dir, "spatial_head")
-                        )
-                        target_spatial_head_ = accelerator.unwrap_model(
-                            target_spatial_head
-                        )
-                        target_spatial_head_.save_pretrained(
-                            os.path.join(output_dir, "target_spatial_head")
-                        )
-
-                    for i, model in enumerate(models):
-                        # make sure to pop weight so that corresponding model is not saved again
-                        if len(weights) > 0:
-                            weights.pop()
+                for i, model in enumerate(models):
+                    # make sure to pop weight so that corresponding model is not saved again
+                    if len(weights) > 0:
+                        weights.pop()
 
         if args.use_lora:
 
@@ -991,13 +975,13 @@ def main(args):
         )
         return prompt_embeds
 
-    WEBVID_DATA_SIZE = 2467378
+    WEBVID_DATA_SIZE = 3022
 
     dataset = Text2VideoDataset(
         args.dataset_path,
         num_train_examples=args.max_train_samples or WEBVID_DATA_SIZE,
         per_gpu_batch_size=args.train_batch_size,
-        global_batch_size=args.train_batch_size * accelerator.num_processes,
+        global_batch_size=args.train_batch_size,
         num_workers=args.dataloader_num_workers,
         duration=args.num_frames,
         frame_interval=args.frame_interval,
@@ -1038,11 +1022,7 @@ def main(args):
             args.disc_gt_data_path,
             num_train_examples=num_image_train_examples,
             per_gpu_batch_size=int(args.train_batch_size * args.disc_tsn_num_frames),
-            global_batch_size=int(
-                args.train_batch_size
-                * accelerator.num_processes
-                * args.disc_tsn_num_frames
-            ),
+            global_batch_size=int(args.train_batch_size * args.disc_tsn_num_frames),
             num_workers=args.dataloader_num_workers,
             resolution=args.resolution,
             shuffle_buffer_size=1000,
@@ -1136,16 +1116,15 @@ def main(args):
 
     # We need to initialize the trackers we use, and also store our configuration.
     # The trackers initializes automatically on the main process.
-    if accelerator.is_main_process:
-        # remove list objects to avoid bug in tensorboard
-        tracker_config = {
-            k: v for k, v in vars(args).items() if not isinstance(v, list)
-        }
-        accelerator.init_trackers(
-            args.tracker_project_name,
-            config=tracker_config,
-            init_kwargs={"wandb": {"name": args.tracker_run_name}},
-        )
+    # remove list objects to avoid bug in tensorboard
+    tracker_config = {
+        k: v for k, v in vars(args).items() if not isinstance(v, list)
+    }
+    accelerator.init_trackers(
+        args.tracker_project_name,
+        config=tracker_config,
+        init_kwargs={"wandb": {"name": args.tracker_run_name}},
+    )
 
     uncond_input_ids = tokenizer(
         [""] * args.train_batch_size,
@@ -1810,7 +1789,6 @@ def main(args):
                                     )
                                     shutil.rmtree(removing_checkpoint)
 
-                    accelerator.wait_for_everyone()
                     save_path = os.path.join(
                         args.output_dir, f"checkpoint-{global_step}"
                     )
@@ -1936,7 +1914,6 @@ def main(args):
                 break
 
     # Create the pipeline using the trained modules and save it.
-    accelerator.wait_for_everyone()
     if accelerator.is_main_process:
         unet = accelerator.unwrap_model(unet)
         if args.use_lora:
