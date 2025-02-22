@@ -2,6 +2,12 @@
 
 This repository contains a simplified implementation of the [Motion Consistency Model](https://github.com/yhZhai/mcm) as described in the original paper. The model was trained on a subset of the WebVid 2M dataset with additional image-caption pairs filtered from the LAION aesthetic dataset.
 
+## Sample Generated Videos
+|Caption|Teacher (ModelScope)|Student Setup 1|Student Setup 2|
+|-----|-----|-----|-----|
+|Worker slicing a piece of meat.|![Image](https://github.com/user-attachments/assets/49aadf34-d0cd-4531-829d-8237f17dd659)|![Image](https://github.com/user-attachments/assets/2bbea26d-6f76-4ac8-baa2-6600aa49697e)|![Image](https://github.com/user-attachments/assets/37ec6102-a63f-40d9-a601-6ae50c8453fd)|
+|Pancakes with chocolate syrup nuts and bananas stack of whole flapjack tasty breakfast|![Image](https://github.com/user-attachments/assets/8a82fd29-b54c-45a6-b79e-72c88d7d8ce4)|![Image](https://github.com/user-attachments/assets/c003cc5a-563d-44f3-9121-3fd3db4caef4)|![Image](https://github.com/user-attachments/assets/c201b303-822c-4ba4-a600-0023c8884aa4)|
+
 ## Training Setup
 
 ### Dataset
@@ -52,12 +58,6 @@ The model was evaluated using Frechet Video Distance (FVD) and CLIP similarity s
 | **Teacher Model (50 DDIM Steps)** | 27.88 | - | - | - |
 | **Student Model - Setup 1** | 22.55 | 25.62 | 26.86 | 27.01 |
 | **Student Model - Setup 2** | 20.13 | 23.41 | 25.31 | 24.62 |
-
-## Sample Generated Videos
-|Caption|Teacher (ModelScope)|Student Setup 1|Student Setup 2|
-|-----|-----|-----|-----|
-|Worker slicing a piece of meat.|![Image](https://github.com/user-attachments/assets/49aadf34-d0cd-4531-829d-8237f17dd659)|![Image](https://github.com/user-attachments/assets/2bbea26d-6f76-4ac8-baa2-6600aa49697e)|![Image](https://github.com/user-attachments/assets/37ec6102-a63f-40d9-a601-6ae50c8453fd)|
-|Pancakes with chocolate syrup nuts and bananas stack of whole flapjack tasty breakfast|![Image](https://github.com/user-attachments/assets/8a82fd29-b54c-45a6-b79e-72c88d7d8ce4)|![Image](https://github.com/user-attachments/assets/c003cc5a-563d-44f3-9121-3fd3db4caef4)|![Image](https://github.com/user-attachments/assets/c201b303-822c-4ba4-a600-0023c8884aa4)|
 
 ## Conclusion
 The second training setup was modified to address oscillations in loss and to prevent the discriminator from overpowering the generator too early. The modifications led to a reduction in FVD scores for 1-step inference, although some increases were observed in multi-step settings. CLIP similarity improved across multiple inference steps, indicating better text-to-video alignment in the previous setup.
