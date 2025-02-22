@@ -1,6 +1,6 @@
 # Motion Consistency Model - Simplified Implementation
 
-<a href='https://huggingface.co/SepehrNoey/MCM-Simplified'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20HF-checkpoint-yellow'></a>
+<a href='https://huggingface.co/SepehrNoey/MCM-Simplified'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20HF-checkpoint-yellow'></a> <a href='https://drive.google.com/drive/folders/1mx1SkyjZyZ9duU4kk3ptKYWcZS1Q8Bya?usp=drive_link'><img src='https://img.shields.io/badge/Demo%20-%20Generated%20Videos%20-%20Green'></a>
 
 This repository contains a simplified implementation of the [Motion Consistency Model](https://github.com/yhZhai/mcm) as described in the original paper. The model was trained on a subset of the WebVid 2M dataset with additional image-caption pairs filtered from the LAION aesthetic dataset.
 
