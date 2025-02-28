@@ -176,7 +176,9 @@ pyrightconfig.json
 # End of https://www.toptal.com/developers/gitignore/api/python
 
 *.DS_Store
-static/css
-static/js
-*.html
-static/
+# static/css
+# static/js
+# *.html
+# static/
+features/
+jepa-model/

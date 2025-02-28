@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="DESCRIPTION META TAG">
+  <meta property="og:title" content="SOCIAL MEDIA TITLE TAG"/>
+  <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG"/>
+  <meta property="og:url" content="URL OF THE WEBSITE"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/image/your_banner_image.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+
+  <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">
+  <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>Academic Project Page</title>
+  <!-- <link rel="icon" type="image/x-icon" href="static/images/favicon.ico"> -->
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+  
+  <style>
+    th{
+      padding-bottom: 8px;
+    }
+    td{
+      padding-left: 10px;
+      padding-top: 6px;
+    }
+    
+  </style>
+</head>
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body" style="padding: 3rem 1.5rem 0.5rem 1.5rem;">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">Project Demo: Motion Consistency Model for Cooking Video Generation</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                <a href="https://sepehrnoey.github.io/" target="_blank">Sepehr Noey Kordkandi</a></span>
+                <span class="author-block">
+                  </div>
+
+                  <div class="is-size-5 publication-authors">
+                    <span class="author-block">Amirkabir University of Technology (Tehran Polytechnic)<br>February 2025</span>
+                  </div>
+
+                  <div class="column has-text-centered">
+                    <div class="publication-links">
+                         <!-- Arxiv PDF link -->
+                      <!-- <span class="link-block">
+                        <a href="https://arxiv.org/pdf/<ARXIV PAPER ID>.pdf" target="_blank"
+                        class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                        </span>
+                        <span>Paper</span>
+                      </a>
+                    </span> -->
+
+                    <!-- Supplementary PDF link -->
+                    <!-- <span class="link-block">
+                      <a href="static/pdfs/supplementary_material.pdf" target="_blank"
+                      class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                        <i class="fas fa-file-pdf"></i>
+                      </span>
+                      <span>Supplementary</span>
+                    </a>
+                  </span> -->
+
+                  <!-- Github link -->
+                  <span class="link-block">
+                    <a href="https://github.com/SepehrNoey/MCM-Simplified" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+                <!-- ArXiv abstract Link -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2406.06890" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Paper abstract -->
+<section class="section hero is-light" style="padding: 1rem 0.5rem;">
+  <div class="is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Description</h2>
+        <div class="content has-text-justified">
+          <p>
+            In this project, we have implemented a simplified version of the paper <a href="https://github.com/yhZhai/mcm" style="color: #3273dc;">Motion Consistency Model</a> on datasets of cooking videos and images from the <a href="https://github.com/m-bain/webvid" style="color: #3273dc;">WebVid-2M (mini)</a> and <a style="color:#3273dc;" href="https://huggingface.co/datasets/laion/laion2B-en-aesthetic">LAION-aesthetics</a>. The training has been done in two different setups: Original setup of the paper (Setup-1), and a modified setup for preventing instability in training (Setup-2). Here, we would like to provide side-by-side visualizations of the generated videos, but more details on the training setups can be found <a href="https://github.com/SepehrNoey/MCM-Simplified" style="color: #3273dc;">here</a>. 
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section hero is-light" style="padding: 0.5rem 0 0 0;">
+  <h3 class="container title is-3" style="font-size:medium;">Table 1: Student Model Setup 1 - Different Inference Steps</h3>
+</section>
+
+<section class="section hero is-light" style="padding: 1rem 0.5rem;">
+  <div class="is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <!-- <h2 class="title is-3">Description</h2> -->
+        <table style="border-collapse: collapse;">
+          <thead>
+              <tr style="border-bottom: 2px solid rgba(0, 0, 0, 0.3)">
+                  <th style="vertical-align: middle; text-align: center;">Caption</th>
+                  <th style="vertical-align: middle; text-align: center;">1 Step</th>
+                  <th style="vertical-align: middle; text-align: center;">2 Steps</th>
+                  <th style="vertical-align: middle; text-align: center;">4 Steps</th>
+                  <th style="vertical-align: middle; text-align: center;">8 Steps</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr style="border-bottom: 1px solid rgba(0, 0, 0, 0.2)">
+                  <td style="vertical-align: middle;">Pancakes with chocolate syrup nuts and bananas stack of whole flapjack tasty breakfast.</td>
+                  <td>
+                      <video controls loop autoplay muted>
+                          <source src="static/videos/inf-results-seed-50p-1step-prev-conf/pancakes with chocolate syrup nuts and bananas stack of whole flapjack tasty breakfast and (video-converter.com).mp4" type="video/mp4">
+                          Your browser does not support the video tag.
+                      </video>
+                  </td>
+                  <td>
+                    <video controls loop autoplay muted>
+                        <source src="static/videos/inf-results-seed-50p-2step-prev-conf/pancakes with chocolate syrup nuts and bananas stack of whole flapjack tasty breakfast and (video-converter.com) (3).mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                  </td>
+                  <td>
+                    <video controls loop autoplay muted>
+                        <source src="static/videos/inf-results-seed-50p-4step-prev-conf/pancakes with chocolate syrup nuts and bananas stack of whole flapjack tasty breakfast and (video-converter.com) (1).mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                  </td>
+                  <td>
+                    <video controls loop autoplay muted>
+                        <source src="static/videos/inf-results-seed-50p-8step-prev-conf/pancakes with chocolate syrup nuts and bananas stack of whole flapjack tasty breakfast and (video-converter.com) (4).mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                  </td>
+                  
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(0, 0, 0, 0.2)">
+                <td style="vertical-align: middle;">Worker slicing a piece of meat.</td>
+                <td>
+                    <video controls loop autoplay muted>
+                        <source src="static/videos/inf-results-seed-50p-1step-prev-conf/worker slicing a piece of meat (3).mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </td>
+                <td>
+                  <video controls loop autoplay muted>
+                      <source src="static/videos/inf-results-seed-50p-2step-prev-conf/worker slicing a piece of meat (4).mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                  </video>
+                </td>
+                <td>
+                  <video controls loop autoplay muted>
+                      <source src="static/videos/inf-results-seed-50p-4step-prev-conf/worker slicing a piece of meat (video-converter.com) (1).mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                  </video>
+                </td>
+                <td>
+                  <video controls loop autoplay muted>
+                      <source src="static/videos/inf-results-seed-50p-8step-prev-conf/worker slicing a piece of meat (5).mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                  </video>
+                </td>
+              </tr>
+              <tr>
+                <td style="vertical-align: middle;">Father in a striped shirt is cooking fresh organic vegetable salad with cocktail tomatoes.</td>
+                <td>
+                    <video controls loop autoplay muted>
+                        <source src="static/videos/inf-results-seed-50p-1step-prev-conf/father in a striped shirt is cooking fresh organic vegetable salad with cocktail tomatoes and.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </td>
+                <td>
+                  <video controls loop autoplay muted>
+                      <source src="static/videos/inf-results-seed-50p-2step-prev-conf/father in a striped shirt is cooking fresh organic vegetable salad with cocktail tomatoes and (1).mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                  </video>
+                </td>
+                <td>
+                  <video controls loop autoplay muted>
+                      <source src="static/videos/inf-results-seed-50p-4step-prev-conf/father in a striped shirt is cooking fresh organic vegetable salad with cocktail tomatoes and (2).mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                  </video>
+                </td>
+                <td>
+                  <video controls loop autoplay muted>
+                      <source src="static/videos/inf-results-seed-50p-8step-prev-conf/father in a striped shirt is cooking fresh organic vegetable salad with cocktail tomatoes and (3).mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                  </video>
+                </td>
+              </tr>
+          </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section hero is-light" style="padding: 4rem 0 0 0;">
+  <h3 class="container title is-3" style="font-size:medium;">Table 2: Student Model Setup 2 - Different Inference Steps</h3>
+</section>
+
+<section class="section hero is-light" style="padding: 1rem 0.5rem;">
+  <div class="is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <!-- <h2 class="title is-3">Description</h2> -->
+        <table style="border-collapse: collapse;">
+          <thead>
+              <tr style="border-bottom: 2px solid rgba(0, 0, 0, 0.3)">
+                  <th style="vertical-align: middle; text-align: center;">Caption</th>
+                  <th style="vertical-align: middle; text-align: center;">1 Step</th>
+                  <th style="vertical-align: middle; text-align: center;">2 Steps</th>
+                  <th style="vertical-align: middle; text-align: center;">4 Steps</th>
+                  <th style="vertical-align: middle; text-align: center;">8 Steps</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr style="border-bottom: 1px solid rgba(0, 0, 0, 0.2)">
+                  <td style="vertical-align: middle;">Pancakes with chocolate syrup nuts and bananas stack of whole flapjack tasty breakfast.</td>
+                  <td>
+                      <video controls loop autoplay muted>
+                          <source src="static/videos/inf-results-seed-50p-1step/pancakes with chocolate syrup nuts and bananas stack of whole flapjack tasty breakfast and (3).mp4" type="video/mp4">
+                          Your browser does not support the video tag.
+                      </video>
+                  </td>
+                  <td>
+                    <video controls loop autoplay muted>
+                        <source src="static/videos/inf-results-seed-50p-2step/pancakes with chocolate syrup nuts and bananas stack of whole flapjack tasty breakfast and (4).mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                  </td>
+                  <td>
+                    <video controls loop autoplay muted>
+                        <source src="static/videos/inf-results-seed-50p-4step/pancakes with chocolate syrup nuts and bananas stack of whole flapjack tasty breakfast and (video-converter.com) (2).mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                  </td>
+                  <td>
+                    <video controls loop autoplay muted>
+                        <source src="static/videos/inf-results-seed-50p-8step/pancakes with chocolate syrup nuts and bananas stack of whole flapjack tasty breakfast and (5).mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                  </td>
+                  
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(0, 0, 0, 0.2)">
+                <td style="vertical-align: middle;">Worker slicing a piece of meat.</td>
+                <td>
+                    <video controls loop autoplay muted>
+                        <source src="static/videos/inf-results-seed-50p-1step/worker slicing a piece of meat (6).mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </td>
+                <td>
+                  <video controls loop autoplay muted>
+                      <source src="static/videos/inf-results-seed-50p-2step/worker slicing a piece of meat.mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                  </video>
+                </td>
+                <td>
+                  <video controls loop autoplay muted>
+                      <source src="static/videos/inf-results-seed-50p-4step/worker slicing a piece of meat (video-converter.com).mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                  </video>
+                </td>
+                <td>
+                  <video controls loop autoplay muted>
+                      <source src="static/videos/inf-results-seed-50p-8step/worker slicing a piece of meat (7).mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                  </video>
+                </td>
+              </tr>
+              <tr>
+                <td style="vertical-align: middle;">Father in a striped shirt is cooking fresh organic vegetable salad with cocktail tomatoes.</td>
+                <td>
+                    <video controls loop autoplay muted>
+                        <source src="static/videos/inf-results-seed-50p-1step/father in a striped shirt is cooking fresh organic vegetable salad with cocktail tomatoes and (4).mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </td>
+                <td>
+                  <video controls loop autoplay muted>
+                      <source src="static/videos/inf-results-seed-50p-2step/father in a striped shirt is cooking fresh organic vegetable salad with cocktail tomatoes and (5).mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                  </video>
+                </td>
+                <td>
+                  <video controls loop autoplay muted>
+                      <source src="static/videos/inf-results-seed-50p-4step/father in a striped shirt is cooking fresh organic vegetable salad with cocktail tomatoes and (7).mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                  </video>
+                </td>
+                <td>
+                  <video controls loop autoplay muted>
+                      <source src="static/videos/inf-results-seed-50p-8step/father in a striped shirt is cooking fresh organic vegetable salad with cocktail tomatoes and (6).mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                  </video>
+                </td>
+              </tr>
+          </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section hero is-light" style="padding: 4rem 0 0 0;">
+  <h3 class="container title is-3" style="font-size:medium;">Table 3: Models Comparison - With Caption: "<em>Female hand squeezes juice from lemon into king prawns.</em>"</h3>
+</section>
+
+<section class="section hero is-light" style="padding: 1rem 0.5rem;">
+  <div class="is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <!-- <h2 class="title is-3">Description</h2> -->
+        <table style="border-collapse: collapse; margin: auto;">
+          <thead>
+              <tr style="border-bottom: 2px solid rgba(0, 0, 0, 0.3)">
+                  <th style="vertical-align: middle; text-align: center;"># Inference Steps</th>
+                  <th style="vertical-align: middle; text-align: center;">Student Model - Setup 1</th>
+                  <th style="vertical-align: middle; text-align: center;">Student Model - Setup 2</th>
+                  <th style="vertical-align: middle; text-align: center;">Teacher Model - ModelScopeT2V</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr style="border-bottom: 1px solid rgba(0, 0, 0, 0.2)">
+                <td style="vertical-align: middle;">1 Step</td>
+                <td>
+                    <video controls loop autoplay muted>
+                        <source src="static/videos/inf-results-seed-50p-1step-prev-conf/female hand squeezes juice from lemon into king prawns.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </td>
+                <td>
+                  <video controls loop autoplay muted>
+                      <source src="static/videos/inf-results-seed-50p-1step/female hand squeezes juice from lemon into king prawns (1).mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                  </video>
+                </td>
+                <td style="vertical-align: middle;">No Video</td>
+                
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(0, 0, 0, 0.2)">
+                <td style="vertical-align: middle;">2 Steps</td>
+                <td>
+                    <video controls loop autoplay muted>
+                        <source src="static/videos/inf-results-seed-50p-2step-prev-conf/female hand squeezes juice from lemon into king prawns (2).mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </td>
+                <td>
+                  <video controls loop autoplay muted>
+                      <source src="static/videos/inf-results-seed-50p-2step/female hand squeezes juice from lemon into king prawns (3).mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                  </video>
+                </td>
+                <td style="vertical-align: middle;">No Video</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(0, 0, 0, 0.2)">
+                <td style="vertical-align: middle;">4 Steps (or 50 DDIM Steps)</td>
+                <td>
+                    <video controls loop autoplay muted>
+                        <source src="static/videos/inf-results-seed-50p-4step-prev-conf/female hand squeezes juice from lemon into king prawns (4).mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </td>
+                <td>
+                  <video controls loop autoplay muted>
+                      <source src="static/videos/inf-results-seed-50p-4step/female hand squeezes juice from lemon into king prawns (5).mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                  </video>
+                </td>
+                <td style="vertical-align: middle;">
+                  <video controls loop autoplay muted>
+                    <source src="static/videos/inf-results-teacher-50ddim/female hand squeezes juice from lemon into king prawns (9).mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                </td>
+              </tr>
+              <tr>
+                <td style="vertical-align: middle;">8 Steps (or 100 DDIM Steps)</td>
+                <td>
+                    <video controls loop autoplay muted>
+                        <source src="static/videos/inf-results-seed-50p-8step-prev-conf/female hand squeezes juice from lemon into king prawns (6).mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </td>
+                <td>
+                  <video controls loop autoplay muted>
+                      <source src="static/videos/inf-results-seed-50p-8step/female hand squeezes juice from lemon into king prawns (7).mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                  </video>
+                </td>
+                <td style="vertical-align: middle;">
+                  <video controls loop autoplay muted>
+                    <source src="static/videos/inf-results-teacher-100ddim/female hand squeezes juice from lemon into king prawns (8).mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                </td>
+              </tr>
+          </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section hero is-light" style="padding: 4rem 0 0 0;">
+  <h3 class="container title is-3">Metrics and Scores</h3>
+</section>
+
+<!-- Paper abstract -->
+<section class="section hero is-light" style="padding: 1rem 0.5rem;">
+  <div class="is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <!-- <h2 class="title is-3">Description</h2> -->
+        <div class="content has-text-justified">
+          <p>
+            To evaluate the performance of our student models, we used the commonly known metric <a href="https://openreview.net/pdf?id=rylgEULtdN" style="color: #3273dc;">Fréchet Video Distance (FVD)</a> on a sub sample of less than 100 generated-real video pairs on same captions. We utilized <a href="https://github.com/JunyaoHu/common_metrics_on_video_quality" style="color: #3273dc;">an open repository</a> for this calculation, but surprisingly we observed FVD increase (getting worse) by increasing the number of inference steps while the generated videos were improving in motion consistency and image quality. <br> <br>
+            The FVD calculation was done on subsets of cooking-related videos from both the WebVid and <a href="https://ieeexplore.ieee.org/document/7780940" style="color: #3273dc;">MSR-VTT</a> datasets but the issue remained unchanged. This conflict with our expectations can be attributed to the quite small size of our evaluation video pairs in addition to the problems of FVD score reported by previous research (<a href="https://oooolga.github.io/JEDi.github.io/" style="color: #3273dc;">JEDi</a>). The issue probably arises from the rejection of the Gaussianity assumptions about I3D features of videos required for FVD calculation exacerbated by inefficiency of FVD score in terms of sample size requirements to provide stable scores. <br> <br>
+            Due to this matter, we also calculated a new proposed metric (JEDi) that has been claimed to greatly address reported problems of FVD metric while improving the alignment with human perception. In contrast to the FVD scores, the JEDi scores improved (decreased in value) by increasing the number of inference steps, affirming our expectations. In the following tables, both the FVD and JEDi scores have been reported.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section hero is-light" style="padding: 0.5rem 0.5rem;">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="is-four-fifths">
+        <!-- <h2 class="title is-3">Abstract</h2> -->
+        <div class="content has-text-justified">
+          <table >
+            <thead>
+                <tr>
+                    <th style="vertical-align: middle; text-align: center;">Model</th>
+                    <th style="vertical-align: middle; text-align: center;">1 Step</th>
+                    <th style="vertical-align: middle; text-align: center;">2 Steps</th>
+                    <th style="vertical-align: middle; text-align: center;">4 Steps</th>
+                    <th style="vertical-align: middle; text-align: center;">8 Steps</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="vertical-align: middle;text-align: center;">Teacher Model (50 and 100 DDIM Steps)</td>
+                    <td style="vertical-align: middle;text-align: center;">-</td>
+                    <td style="vertical-align: middle;text-align: center;">-</td>
+                    <td style="vertical-align: middle;text-align: center;">2954.77</td>
+                    <td style="vertical-align: middle;text-align: center;">2831.23</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: middle;text-align: center;">Student Model - Setup 1</td>
+                    <td style="vertical-align: middle;text-align: center;">2598.15</td>
+                    <td style="vertical-align: middle;text-align: center;">2684.24</td>
+                    <td style="vertical-align: middle;text-align: center;">3082.84</td>
+                    <td style="vertical-align: middle;text-align: center;">3914.78</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: middle;text-align: center;">Student Model - Setup 2</td>
+                    <td style="vertical-align: middle;text-align: center;">2589.01</td>
+                    <td style="vertical-align: middle;text-align: center;">3053.35</td>
+                    <td style="vertical-align: middle;text-align: center;">3284.69</td>
+                    <td style="vertical-align: middle;text-align: center;">3930.07</td>
+                </tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section hero is-light" style="padding: 0.5rem 0 0 0;">
+    <h3 class="container title is-3" style="font-size:small;">Table 4: FVD Score Comparison</h3>
+  </section>
+
+  <section class="section hero is-light" style="padding: 3rem 0rem 0rem 0rem;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="is-four-fifths">
+          <!-- <h2 class="title is-3">Abstract</h2> -->
+          <div class="content has-text-justified">
+            <table >
+              <thead>
+                  <tr>
+                      <th style="vertical-align: middle; text-align: center;">Model</th>
+                      <th style="vertical-align: middle; text-align: center;">1 Step</th>
+                      <th style="vertical-align: middle; text-align: center;">2 Steps</th>
+                      <th style="vertical-align: middle; text-align: center;">4 Steps</th>
+                      <th style="vertical-align: middle; text-align: center;">8 Steps</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td style="vertical-align: middle;text-align: center;">Teacher Model (50 and 100 DDIM Steps)</td>
+                      <td style="vertical-align: middle;text-align: center;">-</td>
+                      <td style="vertical-align: middle;text-align: center;">-</td>
+                      <td style="vertical-align: middle;text-align: center;">0.96</td>
+                      <td style="vertical-align: middle;text-align: center;">0.78</td>
+                  </tr>
+                  <tr>
+                      <td style="vertical-align: middle;text-align: center;">Student Model - Setup 1</td>
+                      <td style="vertical-align: middle;text-align: center;">3.91</td>
+                      <td style="vertical-align: middle;text-align: center;">2.62</td>
+                      <td style="vertical-align: middle;text-align: center;">2.24</td>
+                      <td style="vertical-align: middle;text-align: center;">3.16</td>
+                  </tr>
+                  <tr>
+                      <td style="vertical-align: middle;text-align: center;">Student Model - Setup 2</td>
+                      <td style="vertical-align: middle;text-align: center;">5.07</td>
+                      <td style="vertical-align: middle;text-align: center;">3.12</td>
+                      <td style="vertical-align: middle;text-align: center;">2.33</td>
+                      <td style="vertical-align: middle;text-align: center;">2.82</td>
+                  </tr>
+              </tbody>
+            </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    <section class="section hero is-light" style="padding: 1rem 0 0 0;">
+      <h3 class="container title is-3" style="font-size:small;">Table 5: JEDi Score Comparison</h3>
+    </section>
+
+    <!-- <section class="section hero is-light" style="padding: 4rem 0 0 0;">
+      <h3 class="container title is-3">Metrics and Scores</h3>
+    </section> -->
+    
+    <!-- Paper abstract -->
+    <section class="section hero is-light" style="padding: 1rem 0.5rem;">
+      <div class="is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <!-- <h2 class="title is-3">Description</h2> -->
+            <div class="content has-text-justified">
+              <p>
+                As shown in Table 5, JEDi scores has been able to capture video quality improvements by increasing inference steps in addition to per model comparisons that align with human perceptions. In both setups of training, generated videos in 4 steps have provided the best results. The reason of outperforming 4-step generations than 8-step generations can be attributed to excessive refinements and a decrease in dynamism of frames that together contribute to moving apart from real videos distribution. For any questions, please feel free to contact me by my <a href="mailto:sepehr.nk.81@gmail.com" style="color: #3273dc;">email</a>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- Teaser video-->
+<!-- End teaser video -->
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+  </body>
+  </html>
